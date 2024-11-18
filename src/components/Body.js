@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const Body = () => {
-  const [formData, setFormData] = useState({ name: "", age: 0, file: null });
+  const [formData, setFormData] = useState({ name: "", age: "", file: null });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +63,7 @@ const Body = () => {
           />
         </div>
 
-        {/* Age Field */}
+        {/* Age Dropdown */}
         <div className="relative mb-6">
           <label
             htmlFor="age"
@@ -71,18 +71,21 @@ const Body = () => {
           >
             Age
           </label>
-          <input
-            type="number"
+          <select
             id="age"
             name="age"
             value={formData.age}
             onChange={handleChange}
-            placeholder="Enter your age"
             required
-            min="0"
-            max="100"
             className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 transition-all"
-          />
+          >
+            <option value="" disabled>Select your age</option>
+            {[...Array(101).keys()].map(age => (
+              <option key={age} value={age}>
+                {age}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* File Upload Field */}
